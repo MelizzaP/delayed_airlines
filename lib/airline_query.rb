@@ -95,9 +95,27 @@ class AirData
 
  #    this method returns the average number of minutes
 #     late across all airlines
+  def average_delay
+    sql = %q[
+      SELECT avg(dep_delay_new)
+      FROM delays; 
+    ]
+    result = database.exec(sql).entries
+    result[0]['avg']
+  end
     
 #     this returns the average number of minutes late across
-#     all airlines
-
+#     each airlines it will be a hash
+  def average_delay_per_airline
+    sql = %q[
+      SELECT
+        carrier,
+        avg(dep_delay_new)
+      FROM	delays
+      GROUP BY carrier
+      ORDER BY avg;
+    ]
+    database.exec(sql).entries
+  end
   
 end
