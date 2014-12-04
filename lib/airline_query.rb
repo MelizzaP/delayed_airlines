@@ -41,7 +41,7 @@ class AirData
   #   this method returns the the 2 letter code 
 #   for the airline with the least arrival delays
   def least_arrival_delays
-        sql = %q[
+    sql = %q[
       SELECT 
         carrier,
         count(*)
@@ -54,6 +54,50 @@ class AirData
     result = database.exec(sql).entries
     result[0]['carrier']
   end
+  
+#   this method returns the airport with the highest 
+#   number of delayed flights
+  def most_delayed_city
+    sql = %q[
+      SELECT
+        origin_city_name,
+        count(*) as delay_total
+      FROM
+        delays
+      WHERE dep_delay_new > 0
+      OR arr_delay_new > 0
+      GROUP BY origin_city_name
+      ORDER BY delay_total DESC
+      LIMIT 1;
+    ]
+    result = database.exec(sql).entries
+    result[0]['origin_city_name']
+  end
+
+#   this method returns the airport with the fewest
+#   number of delayed flights
+  def least_delayed_city
+    sql = %q[
+      SELECT
+        origin_city_name,
+        count(*) as delay_total
+      FROM
+        delays
+      WHERE dep_delay_new > 0
+      OR arr_delay_new > 0
+      GROUP BY origin_city_name
+      ORDER BY delay_total
+      LIMIT 1;
+    ]
+    result = database.exec(sql).entries
+    result[0]['origin_city_name']
+  end
+
+ #    this method returns the average number of minutes
+#     late across all airlines
+    
+#     this returns the average number of minutes late across
+#     all airlines
 
   
 end
