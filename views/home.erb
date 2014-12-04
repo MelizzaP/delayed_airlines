@@ -1,0 +1,47 @@
+<h1>Airline Data Fun</h1>
+
+<h4>Airlines in the dataset</h4>
+<%= @total_airlines[0]['count'] %>
+
+<h4>Airline with the most delayed flights</h4>
+<%= @most_delayed_airline %>
+
+<h4>Airline with the least delayed flights</h4>
+<%= @least_delayed_airline %>
+
+<h4>City with the most delayed flights</h4>
+<%= @most_delayed_city %>
+
+<h4>City with the least delayed flights</h4>
+<%= @least_delayed_city %>
+
+<h4>Average Delay across all airlines</h4>
+<%= @average_delay %>
+
+<h4>Average Delay per Airline</h4>
+<% @avg_delay_per_airline.each do |entry| %>
+  <p><%= entry['carrier'] + ' -- ' + entry['avg'] %></p>
+<%end %>
+
+
+
+
+<form method="post" action="/query-result"
+<div>
+  <label for="query">You wanna know more???</label>
+  <br>
+    
+    <select name="query">
+     <option value="airlineCount">How many airlines are represented in this data set?</option>
+     <option value="mostDelayedArriving">Which airline has the most delayed arriving flights?</option>
+     <option value="leastDelayedArriving">Which airline has the fewest delayed arriving flights?</option>
+     <option value="mostDelayedAirport">Which airport city has the most delayed flights?</option>
+     <option value="leastDelayedAirport">Which airport city has the least delayed flights?</option>
+       <option value="avgLateness">What is the average delay of all the flight delays?</option>
+     <option value="avgLatenessPerAirline">What is the average delay of each carrier?</option>
+     <option value="cool">Who is the coolest?</option>
+   </select>
+   <br>
+   <br>
+   <input type="submit" value="Submit that shit!">
+</div>
