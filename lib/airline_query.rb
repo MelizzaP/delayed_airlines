@@ -38,6 +38,22 @@ class AirData
     result[0]['carrier']
   end
   
+  #   this method returns the the 2 letter code 
+#   for the airline with the least arrival delays
+  def least_arrival_delays
+        sql = %q[
+      SELECT 
+        carrier,
+        count(*)
+      FROM delays
+      WHERE arr_delay_new > 0
+      GROUP BY carrier
+      ORDER BY count
+      LIMIT 1;
+    ]
+    result = database.exec(sql).entries
+    result[0]['carrier']
+  end
 
   
 end
